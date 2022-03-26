@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateUser1647993087848 implements MigrationInterface {
-  private userTable = new Table({
-    name: 'users',
+export class CreateCarrier1648297760912 implements MigrationInterface {
+  private carrierTable = new Table({
+    name: 'carrier',
     columns: [
       {
         name: 'id',
@@ -12,47 +12,48 @@ export class CreateUser1647993087848 implements MigrationInterface {
         default: 'uuid_generate_v4()',
       },
       {
-        name: 'email',
+        name: 'Empresa',
         type: 'varchar',
         length: '255',
-        isUnique: true,
         isNullable: false,
       },
       {
-        name: 'password',
+        name: 'carrier',
         type: 'varchar',
         length: '255',
-        isUnique: true,
         isNullable: false,
       },
       {
-        name: 'permission',
+        name: 'services',
         type: 'varchar',
         length: '255',
-        isUnique: true,
         isNullable: false,
       },
       {
-        name: 'created_at',
-        type: 'timestamptz',
-        isPrimary: false,
+        name: 'carroceria',
+        type: 'varchar',
+        length: '255',
         isNullable: false,
-        default: 'now()',
       },
       {
-        name: 'updated_at',
-        type: 'timestamptz',
-        isPrimary: false,
+        name: 'preço',
+        type: 'real',
         isNullable: false,
-        default: 'now()',
+      },
+      {
+        name: 'contato',
+        type: 'varchar',
+        length: '255',
+        isNullable: false,
       },
     ],
   });
+
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createTable(this.userTable);
+    await queryRunner.createTable(this.carrierTable);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable(this.userTable);
+    await queryRunner.dropTable(this.carrierTable);
   }
 }
