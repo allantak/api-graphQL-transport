@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class CreateFreight1648227544756 implements MigrationInterface {
   private freightTable = new Table({
@@ -6,54 +11,70 @@ export class CreateFreight1648227544756 implements MigrationInterface {
     columns: [
       {
         name: 'id',
-        type: 'uuid',
+        type: 'integer',
         isPrimary: true,
-        generationStrategy: 'uuid',
-        default: 'uuid_generate_v4()',
+        isUnique: true,
+        isGenerated: true,
+        generationStrategy: 'increment',
       },
       {
-        name: 'origem',
-        type: 'varchar',
-        length: '255',
+        name: 'user_id',
+        type: 'integer',
         isNullable: true,
       },
       {
-        name: 'destino',
+        name: 'origin',
         type: 'varchar',
         length: '255',
-        isNullable: true,
+        isNullable: false,
       },
       {
-        name: 'preço',
+        name: 'destination',
+        type: 'varchar',
+        length: '255',
+        isNullable: false,
+      },
+      {
+        name: 'price',
         type: 'real',
-        isNullable: false,
+        isNullable: true,
       },
       {
-        name: 'produto',
+        name: 'product',
         type: 'varchar',
         length: '255',
         isNullable: true,
       },
       {
-        name: 'peso',
+        name: 'weight',
         type: 'float',
-        isNullable: false,
+        isNullable: true,
       },
       {
-        name: 'Especie',
+        name: 'species',
         type: 'varchar',
         length: '255',
         isNullable: true,
       },
       {
-        name: 'ratreador_flag',
-        type: 'boolean',
-        isNullable: false,
+        name: 'note',
+        type: 'text',
+        isNullable: true,
       },
       {
-        name: 'agenciamento_flag',
+        name: 'tracker_flag',
         type: 'boolean',
-        isNullable: false,
+        isNullable: true,
+      },
+      {
+        name: 'agencying_flag',
+        type: 'boolean',
+        isNullable: true,
+      },
+      {
+        name: 'delivery_date',
+        type: 'timestamp',
+        isNullable: true,
       },
       {
         name: 'created_at',
@@ -70,23 +91,28 @@ export class CreateFreight1648227544756 implements MigrationInterface {
         default: 'now()',
       },
       {
-        name: 'carrier',
+        name: 'bodyWork',
         type: 'varchar',
-        isNullable: false,
-      },
-      {
-        name: 'data_entrega',
-        type: 'timestamp',
+        length: '100',
         isNullable: false,
       },
     ],
   });
 
+  private foreignKey = new TableForeignKey({
+    columnNames: ['user_id'],
+    referencedColumnNames: ['id'],
+    referencedTableName: 'users',
+    onDelete: 'CASCADE',
+  });
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(this.freightTable);
+    await queryRunner.createForeignKey('freights', this.foreignKey);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.freightTable);
+    //await queryRunner.dropForeignKey('freights', this.foreignKey);
   }
 }

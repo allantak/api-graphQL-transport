@@ -1,21 +1,26 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class CreateCarrier1648297760912 implements MigrationInterface {
   private carrierTable = new Table({
-    name: 'carrier',
+    name: 'carriers',
     columns: [
       {
         name: 'id',
-        type: 'uuid',
+        type: 'integer',
         isPrimary: true,
-        generationStrategy: 'uuid',
-        default: 'uuid_generate_v4()',
+        isUnique: true,
+        isGenerated: true,
+        generationStrategy: 'increment',
       },
       {
-        name: 'Empresa',
-        type: 'varchar',
-        length: '255',
-        isNullable: false,
+        name: 'user_id',
+        type: 'integer',
+        isNullable: true,
       },
       {
         name: 'carrier',
@@ -24,36 +29,57 @@ export class CreateCarrier1648297760912 implements MigrationInterface {
         isNullable: false,
       },
       {
-        name: 'services',
+        name: 'service',
         type: 'varchar',
         length: '255',
         isNullable: false,
       },
       {
-        name: 'carroceria',
+        name: 'company',
         type: 'varchar',
         length: '255',
-        isNullable: false,
+        isNullable: true,
       },
       {
-        name: 'preço',
+        name: 'price',
         type: 'real',
+        isNullable: true,
+      },
+      {
+        name: 'email',
+        type: 'varchar',
+        length: '100',
         isNullable: false,
       },
       {
-        name: 'contato',
+        name: 'phone',
         type: 'varchar',
-        length: '255',
+        length: '100',
+        isNullable: false,
+      },
+      {
+        name: 'bodyWork',
+        type: 'varchar',
+        length: '100',
         isNullable: false,
       },
     ],
   });
 
+  private foreignKey = new TableForeignKey({
+    columnNames: ['user_id'],
+    referencedColumnNames: ['id'],
+    referencedTableName: 'users',
+    onDelete: 'CASCADE',
+  });
+
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(this.carrierTable);
+    await queryRunner.createForeignKey('carriers', this.foreignKey);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.carrierTable);
+    //await queryRunner.dropForeignKey('freights', this.foreignKey);
   }
 }

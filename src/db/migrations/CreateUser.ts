@@ -6,15 +6,16 @@ export class CreateUser1647993087848 implements MigrationInterface {
     columns: [
       {
         name: 'id',
-        type: 'uuid',
+        type: 'integer',
         isPrimary: true,
-        generationStrategy: 'uuid',
-        default: 'uuid_generate_v4()',
+        isUnique: true,
+        isGenerated: true,
+        generationStrategy: 'increment',
       },
       {
         name: 'email',
         type: 'varchar',
-        length: '255',
+        length: '100',
         isUnique: true,
         isNullable: false,
       },
@@ -29,7 +30,6 @@ export class CreateUser1647993087848 implements MigrationInterface {
         name: 'permission',
         type: 'varchar',
         length: '255',
-        isUnique: true,
         isNullable: false,
       },
       {
