@@ -90,12 +90,6 @@ export class CreateFreight1648227544756 implements MigrationInterface {
         isNullable: false,
         default: 'now()',
       },
-      {
-        name: 'bodyWork',
-        type: 'varchar',
-        length: '100',
-        isNullable: false,
-      },
     ],
   });
 

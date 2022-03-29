@@ -22,6 +22,11 @@ export class CreateBodyWork1648471323839 implements MigrationInterface {
         type: 'integer',
         isNullable: true,
       },
+      {
+        name: 'freight_id',
+        type: 'integer',
+        isNullable: true,
+      },
       { name: 'name', type: 'varchar', length: '255', isNullable: true },
     ],
   });
@@ -32,9 +37,17 @@ export class CreateBodyWork1648471323839 implements MigrationInterface {
     referencedTableName: 'carriers',
     onDelete: 'CASCADE',
   });
+
+  private foreingKey_freight = new TableForeignKey({
+    columnNames: ['freight_id'],
+    referencedColumnNames: ['id'],
+    referencedTableName: 'freights',
+    onDelete: 'CASCADE',
+  });
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(this.bodyWorkTable);
     await queryRunner.createForeignKey('bodyWorks', this.foreingKey);
+    await queryRunner.createForeignKey('bodyWorks', this.foreingKey_freight);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

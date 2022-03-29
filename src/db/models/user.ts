@@ -5,12 +5,16 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import Carrier from './carrier';
 
-@Entity('users')
+import Freight from './freght';
+
+@Entity()
 export default class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   email: string;
@@ -26,4 +30,10 @@ export default class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToMany(() => Freight, freight => freight.userConnection)
+  freightConnection: Promise<Freight[]>;
+
+  @OneToMany(() => Carrier, carrier => carrier.userConnection)
+  carrierConnection: Promise<Carrier[]>
 }

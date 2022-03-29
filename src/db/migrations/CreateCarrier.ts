@@ -57,12 +57,6 @@ export class CreateCarrier1648297760912 implements MigrationInterface {
         length: '100',
         isNullable: false,
       },
-      {
-        name: 'bodyWork',
-        type: 'varchar',
-        length: '100',
-        isNullable: false,
-      },
     ],
   });
 
