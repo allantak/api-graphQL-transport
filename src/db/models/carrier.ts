@@ -11,7 +11,7 @@ import {
 import BodyWork from './bodyWork';
 import User from './user';
 
-@Entity()
+@Entity('carriers')
 export default class Carrier {
     @PrimaryGeneratedColumn()
     id: number;

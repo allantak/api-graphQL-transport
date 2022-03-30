@@ -11,7 +11,7 @@ import {
 import BodyWork from './bodyWork';
 import User from './user';
 
-@Entity()
+@Entity('freights')
 export default class Freight {
   @PrimaryGeneratedColumn()
   id: number;
@@ -59,5 +59,5 @@ export default class Freight {
   userConnection: Promise<User>
 
   @OneToMany(() => BodyWork, bodyWork => bodyWork.freightConnection)
-  bodyWorkConnection: Promise<BodyWork[]>
+  bodyWorkConnection: Promise<BodyWork[]>;
 }

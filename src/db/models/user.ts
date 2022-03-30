@@ -11,7 +11,7 @@ import Carrier from './carrier';
 
 import Freight from './freght';
 
-@Entity()
+@Entity('users')
 export default class User {
   @PrimaryGeneratedColumn()
   id: number;

@@ -8,7 +8,7 @@ import {
 import Carrier from './carrier';
 import Freight from './freght';
   
-  @Entity()
+  @Entity('bodyWorks')
   export default class BodyWork {
     @PrimaryGeneratedColumn()
     id: number;
