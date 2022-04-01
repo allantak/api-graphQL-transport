@@ -5,10 +5,15 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config/ormconfig';
 import RepoModule from './repo.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [TypeOrmModule.forRoot(config),
-    RepoModule],
+    RepoModule,
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
+      playground: true,
+    }),],
   controllers: [AppController],
   providers: [AppService],
 })
