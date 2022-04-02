@@ -2,10 +2,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import User from 'src/db/models/user';
 import RepoService from 'src/repo.service';
-import userInput from './input/user.input';
+import UserInput from './input/user.input';
 
 @Resolver()
-class userResolver {
+class UserResolver {
+    
     constructor(private readonly repoService: RepoService) { }
 
     @Query(() => [User])
@@ -19,13 +20,14 @@ class userResolver {
     }
 
     @Mutation(() => User)
-    public async createUser(@Args('data') input: User): Promise<userInput> {
+    public async createUser(@Args('data') input: User): Promise<UserInput> {
         const user = this.repoService.userRepo.create({
-            email: input.email
+            email: input.email,
+            password: input.password,
+            permission: input.permission
         });
         return this.repoService.userRepo.save(user);
     }
-
 }
 
-export default userResolver;
+export default UserResolver;
