@@ -6,17 +6,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config/ormconfig';
 import RepoModule from './repo.module';
 import { GraphQLModule } from '@nestjs/graphql';
-import userResolver from './resolvers/user.resolver';
+import UserResolver from './resolvers/user.resolver';
+import FreightResolver from './resolvers/freight.resolver';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 const graphQLImports = [
-  userResolver,
+  UserResolver,
+  FreightResolver
 ];
 
 @Module({
   imports: [TypeOrmModule.forRoot(config),
     RepoModule,
     ...graphQLImports,
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
       playground: true,
     }),],

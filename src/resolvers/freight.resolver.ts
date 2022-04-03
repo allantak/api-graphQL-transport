@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Args, Mutation, Parent, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import Freight from 'src/db/models/freght';
 import User from 'src/db/models/user';
 import RepoService from 'src/repo.service';
 import FreightInput from './input/freight.input';
 
 
-@Resolver()
+@Resolver(() => Freight)
 class FreightResolver {
     constructor(private readonly repoService: RepoService) { }
 
@@ -30,7 +30,7 @@ class FreightResolver {
         return this.repoService.freightRepo.save(freight);
     }
 
-    @ResolveProperty()
+    @ResolveField(() => User)
     public async user(@Parent() parent): Promise<User> {
         return this.repoService.userRepo.findOne(parent.user_id);
     }
