@@ -5,10 +5,25 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config/ormconfig';
 import RepoModule from './repo.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import UserResolver from './resolvers/user.resolver';
+import FreightResolver from './resolvers/freight.resolver';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+
+const graphQLImports = [
+  UserResolver,
+  FreightResolver
+];
 
 @Module({
   imports: [TypeOrmModule.forRoot(config),
-    RepoModule],
+    RepoModule,
+    ...graphQLImports,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: 'schema.gql',
+      playground: true,
+    }),],
   controllers: [AppController],
   providers: [AppService],
 })
