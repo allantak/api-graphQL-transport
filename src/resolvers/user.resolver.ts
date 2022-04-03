@@ -19,11 +19,6 @@ export default class UserResolver {
         return this.repoService.userRepo.findOne({where: { id: id}});
     }
 
-    @Query(() => User, { nullable: true })
-    public async getUser(@Args('id') id: number): Promise<User> {
-      return this.repoService.userRepo.findOne({where: { id: id}});
-    }
-
     @Mutation(() => User)
     public async createUser(@Args('data') input: UserInput): Promise<User> {
         const user = this.repoService.userRepo.create({
