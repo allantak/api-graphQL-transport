@@ -35,21 +35,21 @@ type User {
 }
 
 type Query {
-  users: [User!]!
-  user(id: Float!): User
-  getUser(id: Float!): User
-  freights: [Freight!]!
-}
-
-type Mutation {
-  createUser(data: UserInput!): User!
-  createFreight(data: FreightInput!): Freight!
+  getUsers: [User!]!
+  getUserEmail(email: String!): User
+  authenticatedUser(data: UserInput!): User!
+  getFreights: [Freight!]!
 }
 
 input UserInput {
   email: String!
   password: String!
   permission: String!
+}
+
+type Mutation {
+  createUser(data: UserInput!): User!
+  createFreight(data: FreightInput!): Freight!
 }
 
 input FreightInput {

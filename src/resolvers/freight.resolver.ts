@@ -11,12 +11,12 @@ class FreightResolver {
     constructor(private readonly repoService: RepoService) { }
 
     @Query(() => [Freight])
-    public async freights(): Promise<Freight[]> {
+    public async getFreights(): Promise<Freight[]> {
         return this.repoService.freightRepo.find();
     }
 
     @Mutation(() => Freight)
-    public async createFreight(@Args('data') input: FreightInput): Promise<FreightInput> {
+    public async createFreight(@Args('data') input: FreightInput): Promise<Freight> {
         const freight = this.repoService.freightRepo.create({
             user_id: input.user_id,
             origin: input.origin,
