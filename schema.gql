@@ -7,14 +7,14 @@ type Freight {
   user_id: Float!
   origin: String!
   destination: String!
-  price: Float!
-  product: String!
-  weight: Float!
-  species: String!
-  note: String!
-  tracker_flag: Boolean!
-  agencying_flag: Boolean!
-  delivery_date: DateTime!
+  price: Float
+  product: String
+  weight: Float
+  species: String
+  note: String
+  tracker_flag: Boolean
+  agencying_flag: Boolean
+  delivery_date: DateTime
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
@@ -39,11 +39,21 @@ type Query {
   getUserEmail(email: String!): User
   authenticatedUser(data: SingInInput!): User!
   getFreights: [Freight!]!
+  searchFreight(data: SearchFreightInput!): [Freight!]!
 }
 
 input SingInInput {
   email: String!
   password: String!
+}
+
+input SearchFreightInput {
+  origin: String
+  destination: String
+  price: Float
+  product: String
+  tracker_flag: Boolean
+  agencying_flag: Boolean
 }
 
 type Mutation {
@@ -63,11 +73,14 @@ input FreightInput {
   user_id: Float!
   origin: String!
   destination: String!
-  price: Float!
+  price: Float
   product: String!
   weight: Float!
   species: String!
-  note: String!
+  note: String
+  tracker_flag: Boolean
+  agencying_flag: Boolean
+  delivery_date: DateTime
 }
 
 input DeleteFreightInput {

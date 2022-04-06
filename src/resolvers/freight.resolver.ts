@@ -5,6 +5,7 @@ import User from 'src/db/models/user';
 import RepoService from 'src/repo.service';
 import DeleteFreightInput from './input/deleteFreight.input';
 import FreightInput from './input/freight.input';
+import SearchFreightInput from './input/searchFreight.input';
 
 
 @Resolver(() => Freight)
@@ -14,6 +15,19 @@ class FreightResolver {
     @Query(() => [Freight])
     public async getFreights(): Promise<Freight[]> {
         return this.repoService.freightRepo.find();
+    }
+
+    @Query(() => [Freight])
+    public async searchFreight(@Args('data') input: SearchFreightInput): Promise<Freight[]> {
+        return await this.repoService.freightRepo.find({
+            where: {
+                origin: input.origin,
+                destination: input.destination,
+                product: input.product,
+                tracker_flag: input.tracker_flag,
+                agencying_flag: input.agencying_flag
+            }
+        })
     }
 
     @Mutation(() => Freight)

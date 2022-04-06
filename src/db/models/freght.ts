@@ -33,35 +33,35 @@ export default class Freight {
   @Column('varchar')
   destination: string;
 
-  @Field()
+  @Field({nullable: true})
   @Column('real')
   price: number;
 
-  @Field()
+  @Field({nullable: true})
   @Column()
   product: string;
 
-  @Field()
+  @Field({nullable: true})
   @Column('float')
   weight: number;
 
-  @Field()
+  @Field({nullable: true})
   @Column()
   species: string;
 
-  @Field()
+  @Field({nullable: true})
   @Column('text')
   note: string;
 
-  @Field()
+  @Field({nullable: true})
   @Column()
   tracker_flag: boolean;
 
-  @Field()
+  @Field({nullable: true})
   @Column()
   agencying_flag: boolean;
 
-  @Field()
+  @Field({nullable: true})
   @Column({ type: 'date' })
   delivery_date: Date;
 
