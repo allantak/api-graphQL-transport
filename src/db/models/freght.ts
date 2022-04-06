@@ -7,7 +7,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  JoinColumn
 } from 'typeorm';
 import BodyWork from './bodyWork';
 import User from './user';
@@ -72,7 +73,11 @@ export default class Freight {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
+  @Field(() => User)
+  user: User;
+
   @ManyToOne(() => User, user => user.freightConnection)
+  @JoinColumn({ name: 'user_id' })
   userConnection: Promise<User>
 
   @OneToMany(() => BodyWork, bodyWork => bodyWork.freightConnection)

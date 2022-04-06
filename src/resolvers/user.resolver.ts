@@ -5,7 +5,7 @@ import RepoService from 'src/repo.service';
 import UserInput from './input/user.input';
 import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus } from '@nestjs/common';
-
+import SingInInput from './input/singIn.input';
 
 
 @Resolver(() => User)
@@ -23,6 +23,16 @@ export default class UserResolver {
         return this.repoService.userRepo.findOne({ where: { email: email } });
     }
 
+    @Query(() => User)
+    public async authenticatedUser(@Args('data') input: SingInInput): Promise<User> {
+        const user = await this.getUserEmail(input.email);
+        const isPasswordMatching = await bcrypt.compare(input.password, user.password);
+        if (!isPasswordMatching) {
+            throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
+        }
+        return user
+    }
+
     @Mutation(() => User)
     public async createUser(@Args('data') input: UserInput): Promise<User> {
         const hashedPassword = await bcrypt.hash(input.password, 10);
@@ -34,13 +44,9 @@ export default class UserResolver {
         return this.repoService.userRepo.save(user);
     }
 
-    @Query(() => User)
-    public async authenticatedUser(@Args('data') input: UserInput): Promise<User> {
-        const user = await this.getUserEmail(input.email);
-        const isPasswordMatching = await bcrypt.compare(input.password, user.password);
-        if (!isPasswordMatching) {
-            throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
-        }
-        return user
+    @Mutation(() => User)
+    public async deleteUser(@Args('id') id: number): Promise<User> {
+        const user = await this.repoService.userRepo.findOne({ where: { id: id } })
+        return await this.repoService.userRepo.remove(user);
     }
 }
