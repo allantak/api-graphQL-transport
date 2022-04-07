@@ -2,10 +2,10 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import User from 'src/db/models/user';
 import RepoService from 'src/repo.service';
-import UserInput from './input/user.input';
+import UserInput from './input/User/user.input';
 import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import SingInInput from './input/singIn.input';
+import SingInInput from './input/User/singIn.input';
 
 
 @Resolver(() => User)

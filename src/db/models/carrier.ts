@@ -4,10 +4,9 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    CreateDateColumn,
-    UpdateDateColumn,
     ManyToOne,
     OneToMany,
+    JoinColumn,
 } from 'typeorm';
 import BodyWork from './bodyWork';
 import User from './user';
@@ -22,38 +21,39 @@ export default class Carrier {
 
     @Field()
     @Column()
+    user_id: number;
+
+    @Field()
+    @Column()
     carrier: string;
 
     @Field()
     @Column()
     service: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column()
     company: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column('real')
     price: number;
 
     @Field()
-    @Column()
+    @Column({ nullable: true })
     email: string;
 
     @Field()
-    @Column()
+    @Column({ nullable: true })
     phone: string;
 
-    @Field()
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date;
-
-    @Field()
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;
+    @Field(() => User)
+    user: User;
 
     @ManyToOne(() => User, user => user.carrierConnection)
+    @JoinColumn({ name: 'user_id' })
     userConnection: Promise<User>;
+
 
     @OneToMany(() => BodyWork, bodyWork => bodyWork.carrierConnection)
     bodyWorkConnection: Promise<BodyWork[]>

@@ -3,9 +3,9 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import Freight from 'src/db/models/freght';
 import User from 'src/db/models/user';
 import RepoService from 'src/repo.service';
-import DeleteFreightInput from './input/deleteFreight.input';
-import FreightInput from './input/freight.input';
-import SearchFreightInput from './input/searchFreight.input';
+import DeleteFreightInput from './input/Freight/deleteFreight.input';
+import FreightInput from './input/Freight/freight.input';
+import SearchFreightInput from './input/Freight/searchFreight.input';
 
 
 @Resolver(() => Freight)

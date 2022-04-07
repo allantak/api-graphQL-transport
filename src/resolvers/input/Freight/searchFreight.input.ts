@@ -2,7 +2,7 @@
 import { Field, InputType } from "@nestjs/graphql";
 
 @InputType()
-class SearchFreightInput {
+export default class SearchFreightInput {
     @Field({nullable: true})
     readonly origin: string;
 
@@ -21,9 +21,6 @@ class SearchFreightInput {
     @Field({nullable: true})
     readonly agencying_flag: boolean;
 }
-
-
-export default SearchFreightInput;
 
 
 

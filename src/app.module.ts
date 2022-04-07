@@ -9,10 +9,12 @@ import { GraphQLModule } from '@nestjs/graphql';
 import UserResolver from './resolvers/user.resolver';
 import FreightResolver from './resolvers/freight.resolver';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import CarrierResolver from './resolvers/carrier.resolver';
 
 const graphQLImports = [
   UserResolver,
-  FreightResolver
+  FreightResolver,
+  CarrierResolver
 ];
 
 @Module({
