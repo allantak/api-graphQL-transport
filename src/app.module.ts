@@ -10,11 +10,13 @@ import UserResolver from './resolvers/user.resolver';
 import FreightResolver from './resolvers/freight.resolver';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import CarrierResolver from './resolvers/carrier.resolver';
+import BodyWorkResolver from './resolvers/bodyWork.resolver';
 
 const graphQLImports = [
   UserResolver,
   FreightResolver,
-  CarrierResolver
+  CarrierResolver,
+  BodyWorkResolver
 ];
 
 @Module({

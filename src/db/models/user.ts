@@ -9,13 +9,12 @@ import {
 } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import Carrier from './carrier';
-
 import Freight from './freght';
 
 @ObjectType()
 @Entity('users')
 export default class User {
-  
+
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -42,6 +41,8 @@ export default class User {
 
   @OneToMany(() => Freight, freight => freight.userConnection)
   freightConnection: Promise<Freight[]>;
+  @Field(() => [Freight])
+  freight: Freight[];
 
   @OneToMany(() => Carrier, carrier => carrier.userConnection)
   carrierConnection: Promise<Carrier[]>

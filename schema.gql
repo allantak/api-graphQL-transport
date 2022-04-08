@@ -25,6 +25,15 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type BodyWork {
+  id: Float!
+  carrier_id: Float
+  freight_id: Float
+  name: String!
+  freight: Freight!
+  carrier: Carrier!
+}
+
 type Carrier {
   id: Float!
   user_id: Float!
@@ -44,6 +53,8 @@ type User {
   permission: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  freight: [Freight!]!
+  freights: [Freight!]!
 }
 
 type Query {
@@ -54,6 +65,7 @@ type Query {
   searchFreight(data: SearchFreightInput!): [Freight!]!
   getCarriers: [Carrier!]!
   searchCarrier(data: SearchCarrierInput!): [Carrier!]!
+  getBodyWork: BodyWork!
 }
 
 input SingInInput {
@@ -84,6 +96,8 @@ type Mutation {
   deleteFreight(data: DeleteFreightInput!): Freight!
   createCarrier(data: CarrierInput!): Carrier!
   deleteCarrier(data: DeleteCarrierInput!): Carrier!
+  createBodyWork(data: BodyWorkInput!): BodyWork!
+  deleteBodyWork(data: DeleteBodyWorkInput!): BodyWork!
 }
 
 input UserInput {
@@ -124,4 +138,16 @@ input CarrierInput {
 input DeleteCarrierInput {
   id: Float!
   user_id: Float!
+}
+
+input BodyWorkInput {
+  carrier_id: Float
+  freight_id: Float
+  name: String!
+}
+
+input DeleteBodyWorkInput {
+  id: Float!
+  carrier_id: Float
+  freight_id: Float
 }

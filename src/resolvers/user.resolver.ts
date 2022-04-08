@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
 import User from 'src/db/models/user';
 import RepoService from 'src/repo.service';
 import UserInput from './input/User/user.input';
 import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import SingInInput from './input/User/singIn.input';
+import Freight from 'src/db/models/freght';
+
 
 
 @Resolver(() => User)
@@ -48,5 +50,10 @@ export default class UserResolver {
     public async deleteUser(@Args('id') id: number): Promise<User> {
         const user = await this.repoService.userRepo.findOne({ where: { id: id } })
         return await this.repoService.userRepo.remove(user);
+    }
+
+    @ResolveField(() => [Freight])
+    public async freights(@Parent() parent: Freight): Promise<Freight[]> {
+        return this.repoService.freightRepo.find({where: {user_id: parent.user_id}});
     }
 }
