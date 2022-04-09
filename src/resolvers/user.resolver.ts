@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import SingInInput from './input/User/singIn.input';
 import Freight from 'src/db/models/freght';
+import Carrier from 'src/db/models/carrier';
 
 
 
@@ -53,7 +54,12 @@ export default class UserResolver {
     }
 
     @ResolveField(() => [Freight])
-    public async freights(@Parent() parent: Freight): Promise<Freight[]> {
-        return this.repoService.freightRepo.find({where: {user_id: parent.user_id}});
+    public async freights(@Parent() parent): Promise<Freight[]> {
+        return this.repoService.freightRepo.find({where: {user_id: parent.id}});
+    }
+
+    @ResolveField(() => [Carrier])
+    public async carriers(@Parent() parent): Promise<Carrier[]> {
+        return this.repoService.carrierRepo.find({where: {user_id: parent.id}});
     }
 }

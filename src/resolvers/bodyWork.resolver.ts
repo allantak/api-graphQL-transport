@@ -13,7 +13,7 @@ import { ResolveField, Parent } from '@nestjs/graphql';
 export default class BodyWorkResolver {
     constructor(private readonly repoService: RepoService) { }
 
-    @Query(() => BodyWork)
+    @Query(() => [BodyWork])
     public async getBodyWork(): Promise<BodyWork[]> {
         return this.repoService.bodyWorkRepo.find();
     }

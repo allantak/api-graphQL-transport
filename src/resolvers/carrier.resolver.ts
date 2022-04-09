@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import  User  from 'src/db/models/user';
+import User from 'src/db/models/user';
 import { Parent, ResolveField } from '@nestjs/graphql';
 import RepoService from 'src/repo.service';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
@@ -7,6 +7,8 @@ import Carrier from "src/db/models/carrier";
 import SearchCarrierInput from './input/Carrier/searchCarrier.input';
 import DeleteCarrierInput from './input/Carrier/deleteCarrier.input';
 import CarrierInput from './input/Carrier/carrier.input';
+import BodyWork from 'src/db/models/bodyWork';
+
 
 @Resolver(() => Carrier)
 class CarrierResolver {
@@ -57,6 +59,11 @@ class CarrierResolver {
     @ResolveField(() => User)
     public async user(@Parent() parent): Promise<User> {
         return this.repoService.userRepo.findOne(parent.user_id);
+    }
+
+    @ResolveField(() => [BodyWork])
+    public async bodyWorks(@Parent() parent): Promise<BodyWork[]> {
+        return this.repoService.bodyWorkRepo.find({ where: { carrier_id: parent.id } })
     }
 
 }

@@ -57,4 +57,6 @@ export default class Carrier {
 
     @OneToMany(() => BodyWork, bodyWork => bodyWork.carrierConnection)
     bodyWorkConnection: Promise<BodyWork[]>
+    @Field(() => [BodyWork])
+    bodyWorks: BodyWork[];
 }

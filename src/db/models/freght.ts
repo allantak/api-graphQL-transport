@@ -33,35 +33,35 @@ export default class Freight {
   @Column('varchar')
   destination: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column('real')
   price: number;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column()
   product: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column('float')
   weight: number;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column()
   species: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column('text')
   note: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column()
   tracker_flag: boolean;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column()
   agencying_flag: boolean;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column({ type: 'date' })
   delivery_date: Date;
 
@@ -82,4 +82,6 @@ export default class Freight {
 
   @OneToMany(() => BodyWork, bodyWork => bodyWork.freightConnection)
   bodyWorkConnection: Promise<BodyWork[]>;
+  @Field(() => [BodyWork])
+  bodyWorks: BodyWork[];
 }

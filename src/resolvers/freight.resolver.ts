@@ -6,6 +6,7 @@ import RepoService from 'src/repo.service';
 import DeleteFreightInput from './input/Freight/deleteFreight.input';
 import FreightInput from './input/Freight/freight.input';
 import SearchFreightInput from './input/Freight/searchFreight.input';
+import BodyWork from 'src/db/models/bodyWork';
 
 
 @Resolver(() => Freight)
@@ -60,6 +61,11 @@ class FreightResolver {
     @ResolveField(() => User)
     public async user(@Parent() parent): Promise<User> {
         return this.repoService.userRepo.findOne(parent.user_id);
+    }
+
+    @ResolveField(() => [BodyWork])
+    public async bodyWorks(@Parent() parent): Promise<BodyWork[]>{
+        return this.repoService.bodyWorkRepo.find({where: { freight_id: parent.id }})
     }
 }
 

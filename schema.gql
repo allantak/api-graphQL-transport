@@ -18,6 +18,7 @@ type Freight {
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
+  bodyWorks: [BodyWork!]!
 }
 
 """
@@ -44,6 +45,7 @@ type Carrier {
   email: String!
   phone: String!
   user: User!
+  bodyWorks: [BodyWork!]!
 }
 
 type User {
@@ -53,8 +55,8 @@ type User {
   permission: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  freight: [Freight!]!
   freights: [Freight!]!
+  carriers: [Carrier!]!
 }
 
 type Query {
@@ -65,7 +67,7 @@ type Query {
   searchFreight(data: SearchFreightInput!): [Freight!]!
   getCarriers: [Carrier!]!
   searchCarrier(data: SearchCarrierInput!): [Carrier!]!
-  getBodyWork: BodyWork!
+  getBodyWork: [BodyWork!]!
 }
 
 input SingInInput {
