@@ -120,6 +120,7 @@ input FreightInput {
   tracker_flag: Boolean
   agencying_flag: Boolean
   delivery_date: DateTime
+  nameBodyWork: String!
 }
 
 input DeleteFreightInput {
@@ -135,6 +136,7 @@ input CarrierInput {
   price: Float
   email: String!
   phone: String!
+  nameBodyWork: String!
 }
 
 input DeleteCarrierInput {

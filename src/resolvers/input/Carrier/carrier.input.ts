@@ -24,4 +24,7 @@ export default class CarrierInput {
     @Field()
     readonly phone: string;
 
+    @Field()
+    nameBodyWork: string;
+
 }

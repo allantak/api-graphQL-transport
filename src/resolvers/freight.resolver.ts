@@ -7,6 +7,7 @@ import DeleteFreightInput from './input/Freight/deleteFreight.input';
 import FreightInput from './input/Freight/freight.input';
 import SearchFreightInput from './input/Freight/searchFreight.input';
 import BodyWork from 'src/db/models/bodyWork';
+import { Like } from 'typeorm';
 
 
 @Resolver(() => Freight)
@@ -22,18 +23,20 @@ class FreightResolver {
     public async searchFreight(@Args('data') input: SearchFreightInput): Promise<Freight[]> {
         return await this.repoService.freightRepo.find({
             where: {
-                origin: input.origin,
-                destination: input.destination,
-                product: input.product,
+                origin: Like(`%${input.origin}$`),
+                destination: Like(`%${input.destination}%`),
+                product: Like(`%${input.product}%`),
                 tracker_flag: input.tracker_flag,
                 agencying_flag: input.agencying_flag
-            }
+            },
         })
     }
 
+    
+
     @Mutation(() => Freight)
     public async createFreight(@Args('data') input: FreightInput): Promise<Freight> {
-        const freight = this.repoService.freightRepo.create({
+        const freight = await this.repoService.freightRepo.create({
             user_id: input.user_id,
             origin: input.origin,
             destination: input.destination,
@@ -43,7 +46,13 @@ class FreightResolver {
             species: input.species,
             note: input.note
         });
-        return this.repoService.freightRepo.save(freight);
+        const saveFreight = await this.repoService.freightRepo.save(freight);
+        const bodyWork = await this.repoService.bodyWorkRepo.create({
+            freight_id: freight.id,
+            name: input.nameBodyWork,
+        })
+        await this.repoService.bodyWorkRepo.save(bodyWork)
+        return saveFreight
     }
 
     @Mutation(() => Freight)
@@ -67,6 +76,8 @@ class FreightResolver {
     public async bodyWorks(@Parent() parent): Promise<BodyWork[]>{
         return this.repoService.bodyWorkRepo.find({where: { freight_id: parent.id }})
     }
+
+    
 }
 
 export default FreightResolver;

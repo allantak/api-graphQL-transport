@@ -36,6 +36,8 @@ export default class FreightInput {
     @Field({ nullable: true })
     readonly delivery_date: Date;
 
+    @Field()
+    nameBodyWork: string;
 }
 
 

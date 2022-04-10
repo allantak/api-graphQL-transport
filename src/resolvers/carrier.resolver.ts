@@ -8,6 +8,7 @@ import SearchCarrierInput from './input/Carrier/searchCarrier.input';
 import DeleteCarrierInput from './input/Carrier/deleteCarrier.input';
 import CarrierInput from './input/Carrier/carrier.input';
 import BodyWork from 'src/db/models/bodyWork';
+import { Like } from 'typeorm';
 
 
 @Resolver(() => Carrier)
@@ -23,25 +24,31 @@ class CarrierResolver {
     public async searchCarrier(@Args('data') input: SearchCarrierInput): Promise<Carrier[]> {
         return this.repoService.carrierRepo.find({
             where: {
-                carrier: input.carrier,
+                carrier: Like(`%${input.carrier}%`),
                 service: input.service,
-                company: input.company
+                company: Like(`%${input.company}%`)
             }
         });
     }
 
     @Mutation(() => Carrier)
     public async createCarrier(@Args('data') input: CarrierInput): Promise<Carrier> {
-        const carrier = this.repoService.carrierRepo.create({
+        const carrier = await this.repoService.carrierRepo.create({
             user_id: input.user_id,
             carrier: input.carrier,
             service: input.service,
             company: input.company,
             price: input.price,
             email: input.email,
-            phone: input.phone
+            phone: input.phone,
+        });
+        const saveCarrier = await this.repoService.carrierRepo.save(carrier);
+        const bodyWork = await this.repoService.bodyWorkRepo.create({
+            carrier_id: saveCarrier.id,
+            name: input.nameBodyWork,
         })
-        return this.repoService.carrierRepo.save(carrier)
+        await this.repoService.bodyWorkRepo.save(bodyWork);
+        return saveCarrier;
     }
 
     @Mutation(() => Carrier)
