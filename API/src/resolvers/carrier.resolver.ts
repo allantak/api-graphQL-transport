@@ -26,7 +26,7 @@ class CarrierResolver {
             where: {
                 carrier: Like(`%${input.carrier}%`),
                 service: input.service,
-                company: Like(`%${input.company}%`)
+                company: input.company,
             }
         });
     }

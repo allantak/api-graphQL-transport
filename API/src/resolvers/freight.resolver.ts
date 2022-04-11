@@ -23,8 +23,8 @@ class FreightResolver {
     public async searchFreight(@Args('data') input: SearchFreightInput): Promise<Freight[]> {
         return await this.repoService.freightRepo.find({
             where: {
-                origin: Like(`%${input.origin}$`),
-                destination: Like(`%${input.destination}%`),
+                origin: input.origin,
+                destination: input.destination,
                 product: Like(`%${input.product}%`),
                 tracker_flag: input.tracker_flag,
                 agencying_flag: input.agencying_flag
