@@ -90,6 +90,7 @@ input SearchCarrierInput {
   service: String
   company: String
   price: Float
+  nameBodyWorks: String
 }
 
 type Mutation {

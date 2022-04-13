@@ -7,6 +7,7 @@ import DeleteFreightInput from './input/Freight/deleteFreight.input';
 import FreightInput from './input/Freight/freight.input';
 import SearchFreightInput from './input/Freight/searchFreight.input';
 import BodyWork from 'src/db/models/bodyWork';
+import { Like } from 'typeorm';
 
 @Resolver(() => Freight)
 class FreightResolver {
@@ -19,30 +20,22 @@ class FreightResolver {
 
     @Query(() => [Freight])
     public async searchFreight(@Args('data') input: SearchFreightInput): Promise<Freight[]> {
-        const origin = await input.origin == undefined ? null: input.origin
-        const destination = await input.destination == undefined ? null: input.destination
-        const price = await input.price == undefined ? null: input.price
-        const product = await input.product == undefined ? null: input.product
-        const tracker = await input.tracker_flag == undefined? null: input.tracker_flag
-        const agencying = await input.agencying_flag == undefined ? null: input.agencying_flag
-        const nameBodyWork = await input.nameBodyWork == undefined ? null : input.nameBodyWork
-
-        const freights = await this.repoService.freightRepo
-        .query(`SELECT * FROM freights
-            LEFT JOIN "bodyWorks" 
-            ON "bodyWorks".freight_id = freights.id 
-            WHERE freights.origin LIKE '%${origin}%'
-            OR freights.destination LIKE '%${destination}%'
-            OR freights.price = ${price}
-            OR freights.product LIKE '%${product}%'
-            OR freights.tracker_flag = ${tracker}
-            OR freights.agencying_flag = ${agencying}
-            OR "bodyWorks".name LIKE '%${nameBodyWork}%'`)
-
-        return freights
+        return await this.repoService.freightRepo.find({
+            where: [
+                { origin: Like(`%${input.origin}%`)  },
+                { destination: Like(`%${input.destination}%`) },
+                { price: input.price },
+                { product: Like(`%${input.product}%`)},
+                { tracker_flag: input.tracker_flag },
+                { agencying_flag: input.agencying_flag },
+                {
+                    bodyWorkConnection: {
+                        name: Like(`%${input.nameBodyWork}%`)
+                    },
+                }
+            ]
+        })
     }
-
-
 
     @Mutation(() => Freight)
     public async createFreight(@Args('data') input: FreightInput): Promise<Freight> {
@@ -86,7 +79,6 @@ class FreightResolver {
     public async bodyWorks(@Parent() parent): Promise<BodyWork[]> {
         return this.repoService.bodyWorkRepo.find({ where: { freight_id: parent.id } })
     }
-
 
 }
 

@@ -73,15 +73,11 @@ export default class Freight {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @Field(() => User)
-  user: User;
-
   @ManyToOne(() => User, user => user.freightConnection)
   @JoinColumn({ name: 'user_id' })
   userConnection: Promise<User>
 
   @OneToMany(() => BodyWork, bodyWork => bodyWork.freightConnection)
+  @JoinColumn({ name: 'bodyWork_id' })
   bodyWorkConnection: Promise<BodyWork[]>;
-  @Field(() => [BodyWork])
-  bodyWorks: BodyWork[];
 }

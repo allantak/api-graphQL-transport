@@ -41,11 +41,8 @@ export default class User {
 
   @OneToMany(() => Freight, freight => freight.userConnection)
   freightConnection: Promise<Freight[]>;
-  @Field(() => [Freight])
-  freights: Freight[];
 
   @OneToMany(() => Carrier, carrier => carrier.userConnection)
   carrierConnection: Promise<Carrier[]>
-  @Field(() => [Carrier])
-  carriers: Carrier[];
+
 }

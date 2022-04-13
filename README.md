@@ -14,5 +14,5 @@ API de uma aplicação mobile(Transport), Transport é um aplicativo com intuito
 - [x] CRUD de freights
 - [x] CRUD de carrier
 - [x] CRUD de bodyWork
-- [ ] Autêntica de user
+- [x] Autêntica de user
 - [ ] Pesquisa de multiplas models

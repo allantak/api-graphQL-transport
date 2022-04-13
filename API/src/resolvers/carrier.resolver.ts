@@ -23,11 +23,14 @@ class CarrierResolver {
     @Query(() => [Carrier])
     public async searchCarrier(@Args('data') input: SearchCarrierInput): Promise<Carrier[]> {
         return this.repoService.carrierRepo.find({
-            where: {
-                carrier: Like(`%${input.carrier}%`),
-                service: input.service,
-                company: input.company,
-            }
+            where: [
+                { carrier: Like(`%${input.carrier}%`) },
+                { service: Like(`%${input.service}%`) },
+                { company: Like(`%${input.company}%`) },
+                { bodyWorkConnection: {
+                    name: Like(`%${input.nameBodyWorks}%`)
+                }}
+            ]
         });
     }
 

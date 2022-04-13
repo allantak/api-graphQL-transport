@@ -47,16 +47,11 @@ export default class Carrier {
     @Column({ nullable: true })
     phone: string;
 
-    @Field(() => User)
-    user: User;
-
     @ManyToOne(() => User, user => user.carrierConnection)
     @JoinColumn({ name: 'user_id' })
     userConnection: Promise<User>;
 
-
     @OneToMany(() => BodyWork, bodyWork => bodyWork.carrierConnection)
+    @JoinColumn({ name: 'bodyWork_id' })
     bodyWorkConnection: Promise<BodyWork[]>
-    @Field(() => [BodyWork])
-    bodyWorks: BodyWork[];
 }

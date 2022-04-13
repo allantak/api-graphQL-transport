@@ -30,12 +30,6 @@ export default class BodyWork {
   @Column()
   name: string;
 
-  @Field(() => Freight)
-  freight: Freight;
-
-  @Field(() => Carrier)
-  carrier: Carrier;
-
   @ManyToOne(() => Carrier, carrier => carrier.bodyWorkConnection)
   @JoinColumn({ name: 'carrier_id' })
   carrierConnection: Promise<Carrier>;

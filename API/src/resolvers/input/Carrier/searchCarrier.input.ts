@@ -14,4 +14,7 @@ export default class SearchCarrierInput {
 
     @Field({ nullable: true })
     readonly price: number;
+
+    @Field({nullable: true})
+    readonly nameBodyWorks: string;
 }
