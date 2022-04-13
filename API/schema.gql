@@ -82,6 +82,7 @@ input SearchFreightInput {
   product: String
   tracker_flag: Boolean
   agencying_flag: Boolean
+  nameBodyWork: String
 }
 
 input SearchCarrierInput {

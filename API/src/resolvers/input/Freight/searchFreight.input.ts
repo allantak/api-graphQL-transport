@@ -21,6 +21,9 @@ export default class SearchFreightInput {
     @Field({ nullable: true })
     readonly agencying_flag: boolean;
 
+    @Field({nullable: true})
+    readonly nameBodyWork: string;
+
 }
 
 

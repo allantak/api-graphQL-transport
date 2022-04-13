@@ -34,7 +34,7 @@
     "@types/bcrypt": "^5.0.0",
     "apollo-server-express": "^3.6.7",
     "bcrypt": "^5.0.1",
-    "dataloader": "^2.0.0",
+    "dataloader": "^2.1.0",
     "dotenv": "^16.0.0",
     "graphql": "^16.3.0",
     "graphql-tools": "^8.2.1",
@@ -43,6 +43,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "type-graphql": "^1.1.1",
+    "type-graphql-dataloader": "^0.5.0",
     "typeorm": "^0.3.1"
   },
   "devDependencies": {

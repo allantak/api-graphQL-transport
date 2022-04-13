@@ -11,7 +11,7 @@ import Carrier from './carrier';
 import Freight from './freght';
 
 @ObjectType()
-@Entity('bodyWorks')
+@Entity("bodyWorks")
 export default class BodyWork {
 
   @Field()
