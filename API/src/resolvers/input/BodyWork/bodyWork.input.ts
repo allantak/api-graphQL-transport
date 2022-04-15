@@ -6,6 +6,9 @@ import { InputType } from "@nestjs/graphql";
 @InputType()
 export default class BodyWorkInput {
     @Field({ nullable: true })
+    id: number;
+
+    @Field({ nullable: true })
     carrier_id: number;
 
     @Field({ nullable: true })

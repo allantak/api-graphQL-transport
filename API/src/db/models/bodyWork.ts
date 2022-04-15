@@ -18,11 +18,11 @@ export default class BodyWork {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column()
   carrier_id: number;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   @Column()
   freight_id: number;
 

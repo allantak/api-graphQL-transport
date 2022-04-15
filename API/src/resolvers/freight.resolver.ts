@@ -8,6 +8,7 @@ import FreightInput from './input/Freight/freight.input';
 import SearchFreightInput from './input/Freight/searchFreight.input';
 import BodyWork from 'src/db/models/bodyWork';
 import { Like } from 'typeorm';
+import UpdateFreightInput from './input/Freight/updateFreight.input';
 
 @Resolver(() => Freight)
 class FreightResolver {
@@ -22,15 +23,15 @@ class FreightResolver {
     public async searchFreight(@Args('data') input: SearchFreightInput): Promise<Freight[]> {
         return await this.repoService.freightRepo.find({
             where: [
-                { origin: Like(`%${input.origin}%`)  },
-                { destination: Like(`%${input.destination}%`) },
+                { origin: input.origin == undefined ? input.origin : Like(`%${input.origin}%`) },
+                { destination: input.destination == undefined ? input.destination : Like(`%${input.destination}%`) },
                 { price: input.price },
-                { product: Like(`%${input.product}%`)},
+                { product: input.product == undefined ? input.product : Like(`%${input.product}%`) },
                 { tracker_flag: input.tracker_flag },
                 { agencying_flag: input.agencying_flag },
                 {
                     bodyWorkConnection: {
-                        name: Like(`%${input.nameBodyWork}%`)
+                        name: input.nameBodyWork == undefined ? input.nameBodyWork : Like(`%${input.nameBodyWork}%`)
                     },
                 }
             ]
@@ -50,12 +51,31 @@ class FreightResolver {
             note: input.note
         });
         const saveFreight = await this.repoService.freightRepo.save(freight);
-        const bodyWork = await this.repoService.bodyWorkRepo.create({
-            freight_id: freight.id,
-            name: input.nameBodyWork,
-        })
-        await this.repoService.bodyWorkRepo.save(bodyWork)
+        if (input.nameBodyWork) {
+            const bodyWork = await this.repoService.bodyWorkRepo.create({
+                freight_id: freight.id,
+                name: input.nameBodyWork,
+            })
+            await this.repoService.bodyWorkRepo.save(bodyWork)
+        }
         return saveFreight
+    }
+
+    @Mutation(() => Freight)
+    public async updateFreight(@Args('data') input: UpdateFreightInput): Promise<Freight> {
+        const findId = await this.repoService.freightRepo.findOne({ where: { id: input.id } })
+        const update = await this.repoService.freightRepo.save({
+            id: findId.id,
+            user_id: input.user_id,
+            origin: input.origin,
+            destination: input.destination,
+            price: input.price,
+            product: input.product,
+            weight: input.weight,
+            species: input.species,
+            note: input.note
+        });
+        return update
     }
 
     @Mutation(() => Freight)

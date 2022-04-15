@@ -29,6 +29,18 @@ export default class BodyWorkResolver {
     }
 
     @Mutation(() => BodyWork)
+    public async updateBodyWork(@Args('data') input: BodyWorkInput): Promise<BodyWork> {
+        const findId = await this.repoService.bodyWorkRepo.findOne({ where: { id: input.id } })
+        const update = await this.repoService.bodyWorkRepo.save({
+            id: findId.id,
+            name: input.name,
+            carrier_id: input.carrier_id,
+            freight_id: input.freight_id
+        })
+        return update
+    }
+
+    @Mutation(() => BodyWork)
     public async deleteBodyWork(@Args('data') input: DeleteBodyWorkInput): Promise<BodyWork> {
         const bodyWork = await this.repoService.bodyWorkRepo.findOne({ where: { id: input.id } })
         if (!bodyWork || bodyWork.carrier_id !== input.carrier_id || bodyWork.freight_id !== input.freight_id)

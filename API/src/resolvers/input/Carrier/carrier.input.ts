@@ -3,6 +3,10 @@ import { Field, InputType } from "@nestjs/graphql";
 
 @InputType()
 export default class CarrierInput {
+
+    @Field({ nullable: true })
+    readonly id: number;
+
     @Field()
     readonly user_id: number;
 

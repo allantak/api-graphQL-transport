@@ -97,10 +97,13 @@ type Mutation {
   createUser(data: UserInput!): User!
   deleteUser(id: Float!): User!
   createFreight(data: FreightInput!): Freight!
+  updateFreight(data: UpdateFreightInput!): Freight!
   deleteFreight(data: DeleteFreightInput!): Freight!
   createCarrier(data: CarrierInput!): Carrier!
+  updateCarrier(data: UpdateCarrierInput!): Carrier!
   deleteCarrier(data: DeleteCarrierInput!): Carrier!
   createBodyWork(data: BodyWorkInput!): BodyWork!
+  updateBodyWork(data: BodyWorkInput!): BodyWork!
   deleteBodyWork(data: DeleteBodyWorkInput!): BodyWork!
 }
 
@@ -111,6 +114,7 @@ input UserInput {
 }
 
 input FreightInput {
+  id: Float
   user_id: Float!
   origin: String!
   destination: String!
@@ -125,12 +129,28 @@ input FreightInput {
   nameBodyWork: String!
 }
 
+input UpdateFreightInput {
+  id: Float!
+  user_id: Float
+  origin: String
+  destination: String
+  price: Float
+  product: String
+  weight: Float
+  species: String
+  note: String
+  tracker_flag: Boolean
+  agencying_flag: Boolean
+  delivery_date: DateTime
+}
+
 input DeleteFreightInput {
   id: Float!
   user_id: Float!
 }
 
 input CarrierInput {
+  id: Float
   user_id: Float!
   carrier: String!
   service: String!
@@ -141,12 +161,24 @@ input CarrierInput {
   nameBodyWork: String!
 }
 
+input UpdateCarrierInput {
+  id: Float!
+  user_id: Float
+  carrier: String
+  service: String
+  company: String
+  price: Float
+  email: String
+  phone: String
+}
+
 input DeleteCarrierInput {
   id: Float!
   user_id: Float!
 }
 
 input BodyWorkInput {
+  id: Float
   carrier_id: Float
   freight_id: Float
   name: String!

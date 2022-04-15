@@ -1,31 +1,30 @@
 /* eslint-disable prettier/prettier */
-import { Field, InputType } from "@nestjs/graphql";
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export default class FreightInput {
-
-    @Field({ nullable: true })
+export default class UpdateFreightInput {
+    @Field()
     readonly id: number;
 
-    @Field()
+    @Field({ nullable: true })
     readonly user_id: number;
 
-    @Field()
+    @Field({ nullable: true })
     readonly origin: string;
 
-    @Field()
+    @Field({ nullable: true })
     readonly destination: string;
 
     @Field({ nullable: true })
     readonly price: number;
 
-    @Field()
+    @Field({ nullable: true })
     readonly product: string;
 
-    @Field()
+    @Field({ nullable: true })
     readonly weight: number;
 
-    @Field()
+    @Field({ nullable: true })
     readonly species: string;
 
     @Field({ nullable: true })
@@ -39,12 +38,4 @@ export default class FreightInput {
 
     @Field({ nullable: true })
     readonly delivery_date: Date;
-
-    @Field()
-    readonly nameBodyWork: string;
 }
-
-
-
-
-

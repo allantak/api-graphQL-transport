@@ -9,6 +9,7 @@ import DeleteCarrierInput from './input/Carrier/deleteCarrier.input';
 import CarrierInput from './input/Carrier/carrier.input';
 import BodyWork from 'src/db/models/bodyWork';
 import { Like } from 'typeorm';
+import UpdateCarrierInput from './input/Carrier/updateCarrier.input';
 
 
 @Resolver(() => Carrier)
@@ -27,9 +28,11 @@ class CarrierResolver {
                 { carrier: Like(`%${input.carrier}%`) },
                 { service: Like(`%${input.service}%`) },
                 { company: Like(`%${input.company}%`) },
-                { bodyWorkConnection: {
-                    name: Like(`%${input.nameBodyWorks}%`)
-                }}
+                {
+                    bodyWorkConnection: {
+                        name: Like(`%${input.nameBodyWorks}%`)
+                    }
+                }
             ]
         });
     }
@@ -46,12 +49,30 @@ class CarrierResolver {
             phone: input.phone,
         });
         const saveCarrier = await this.repoService.carrierRepo.save(carrier);
-        const bodyWork = await this.repoService.bodyWorkRepo.create({
-            carrier_id: saveCarrier.id,
-            name: input.nameBodyWork,
-        })
-        await this.repoService.bodyWorkRepo.save(bodyWork);
+        if (input.nameBodyWork) {
+            const bodyWork = await this.repoService.bodyWorkRepo.create({
+                carrier_id: saveCarrier.id,
+                name: input.nameBodyWork,
+            })
+            await this.repoService.bodyWorkRepo.save(bodyWork);
+        }
         return saveCarrier;
+    }
+
+    @Mutation(() => Carrier)
+    public async updateCarrier(@Args('data') input: UpdateCarrierInput): Promise<Carrier> {
+        const findId = await this.repoService.carrierRepo.findOne({ where: { id: input.id } })
+        const update = await this.repoService.carrierRepo.save({
+            id: findId.id,
+            user_id: input.user_id,
+            carrier: input.carrier,
+            service: input.service,
+            company: input.company,
+            price: input.price,
+            email: input.email,
+            phone: input.phone,
+        })
+        return update
     }
 
     @Mutation(() => Carrier)
