@@ -25,12 +25,12 @@ class CarrierResolver {
     public async searchCarrier(@Args('data') input: SearchCarrierInput): Promise<Carrier[]> {
         return this.repoService.carrierRepo.find({
             where: [
-                { carrier: Like(`%${input.carrier}%`) },
-                { service: Like(`%${input.service}%`) },
-                { company: Like(`%${input.company}%`) },
+                { carrier: input.carrier == undefined ? input.carrier : Like(`%${input.carrier}%`) },
+                { service: input.service == undefined ? input.service : Like(`%${input.service}%`) },
+                { company: input.company == undefined ? input.company : Like(`%${input.company}%`) },
                 {
                     bodyWorkConnection: {
-                        name: Like(`%${input.nameBodyWorks}%`)
+                        name: input.nameBodyWorks == undefined ? input.nameBodyWorks : Like(`%${input.nameBodyWorks}%`)
                     }
                 }
             ]
