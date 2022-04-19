@@ -27,4 +27,7 @@ export default class UpdateCarrierInput {
 
     @Field({ nullable: true })
     readonly phone: string;
+
+    @Field({ nullable: true })
+    readonly img: string;
 }

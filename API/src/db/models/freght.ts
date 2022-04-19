@@ -55,6 +55,14 @@ export default class Freight {
 
   @Field({ nullable: true })
   @Column()
+  email: string;
+
+  @Field({ nullable: true })
+  @Column()
+  phone: string;
+
+  @Field({ nullable: true })
+  @Column()
   tracker_flag: boolean;
 
   @Field({ nullable: true })

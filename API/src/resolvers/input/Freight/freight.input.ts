@@ -31,6 +31,12 @@ export default class FreightInput {
     @Field({ nullable: true })
     readonly note: string;
 
+    @Field()
+    readonly email: string;
+
+    @Field()
+    readonly phone: string;
+
     @Field({ nullable: true })
     readonly tracker_flag: boolean;
 
@@ -40,7 +46,7 @@ export default class FreightInput {
     @Field({ nullable: true })
     readonly delivery_date: Date;
 
-    @Field()
+    @Field({ nullable: true })
     readonly nameBodyWork: string;
 }
 

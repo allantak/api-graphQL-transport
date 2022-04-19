@@ -48,7 +48,9 @@ class FreightResolver {
             product: input.product,
             weight: input.weight,
             species: input.species,
-            note: input.note
+            note: input.note,
+            email: input.email,
+            phone: input.phone
         });
         const saveFreight = await this.repoService.freightRepo.save(freight);
         if (input.nameBodyWork) {

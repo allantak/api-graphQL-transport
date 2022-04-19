@@ -31,6 +31,12 @@ export default class UpdateFreightInput {
     readonly note: string;
 
     @Field({ nullable: true })
+    readonly email: string;
+
+    @Field({ nullable: true })
+    readonly phone: string;
+
+    @Field({ nullable: true })
     readonly tracker_flag: boolean;
 
     @Field({ nullable: true })

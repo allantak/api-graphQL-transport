@@ -47,6 +47,10 @@ export default class Carrier {
     @Column({ nullable: true })
     phone: string;
 
+    @Field()
+    @Column({ nullable: true })
+    img: string;
+
     @ManyToOne(() => User, user => user.carrierConnection)
     @JoinColumn({ name: 'user_id' })
     userConnection: Promise<User>;

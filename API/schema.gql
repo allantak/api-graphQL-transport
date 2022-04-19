@@ -12,6 +12,8 @@ type Freight {
   weight: Float
   species: String
   note: String
+  email: String
+  phone: String
   tracker_flag: Boolean
   agencying_flag: Boolean
   delivery_date: DateTime
@@ -44,6 +46,7 @@ type Carrier {
   price: Float
   email: String!
   phone: String!
+  img: String!
   user: User!
   bodyWorks: [BodyWork!]!
 }
@@ -123,10 +126,12 @@ input FreightInput {
   weight: Float!
   species: String!
   note: String
+  email: String!
+  phone: String!
   tracker_flag: Boolean
   agencying_flag: Boolean
   delivery_date: DateTime
-  nameBodyWork: String!
+  nameBodyWork: String
 }
 
 input UpdateFreightInput {
@@ -139,6 +144,8 @@ input UpdateFreightInput {
   weight: Float
   species: String
   note: String
+  email: String
+  phone: String
   tracker_flag: Boolean
   agencying_flag: Boolean
   delivery_date: DateTime
@@ -158,7 +165,8 @@ input CarrierInput {
   price: Float
   email: String!
   phone: String!
-  nameBodyWork: String!
+  img: String
+  nameBodyWork: String
 }
 
 input UpdateCarrierInput {
@@ -170,6 +178,7 @@ input UpdateCarrierInput {
   price: Float
   email: String
   phone: String
+  img: String
 }
 
 input DeleteCarrierInput {

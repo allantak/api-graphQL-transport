@@ -47,6 +47,7 @@ class CarrierResolver {
             price: input.price,
             email: input.email,
             phone: input.phone,
+            img: input.img,
         });
         const saveCarrier = await this.repoService.carrierRepo.save(carrier);
         if (input.nameBodyWork) {
