@@ -27,7 +27,7 @@ export default class User {
   @Column({ unique: true })
   password: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column()
   permission: string;
 

@@ -9,6 +9,6 @@ export default class UserInput {
     @Field()
     readonly password: string;
 
-    @Field()
+    @Field({ nullable: true })
     readonly permission: string;
 }

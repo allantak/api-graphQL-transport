@@ -55,7 +55,7 @@ type User {
   id: Float!
   email: String!
   password: String!
-  permission: String!
+  permission: String
   createdAt: DateTime!
   updatedAt: DateTime!
   freights: [Freight!]!
@@ -113,7 +113,7 @@ type Mutation {
 input UserInput {
   email: String!
   password: String!
-  permission: String!
+  permission: String
 }
 
 input FreightInput {
