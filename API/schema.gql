@@ -12,6 +12,7 @@ type Freight {
   weight: Float
   species: String
   note: String
+  company: String
   email: String
   phone: String
   tracker_flag: Boolean
@@ -83,6 +84,7 @@ input SearchFreightInput {
   destination: String
   price: Float
   product: String
+  company: String
   tracker_flag: Boolean
   agencying_flag: Boolean
   nameBodyWork: String
@@ -127,6 +129,7 @@ input FreightInput {
   species: String!
   note: String
   email: String!
+  company: String
   phone: String!
   tracker_flag: Boolean
   agencying_flag: Boolean
@@ -145,6 +148,7 @@ input UpdateFreightInput {
   species: String
   note: String
   email: String
+  company: String
   phone: String
   tracker_flag: Boolean
   agencying_flag: Boolean

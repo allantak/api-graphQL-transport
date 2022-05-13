@@ -16,6 +16,9 @@ export default class SearchFreightInput {
     readonly product: string;
 
     @Field({ nullable: true })
+    readonly company: string;
+
+    @Field({ nullable: true })
     readonly tracker_flag: boolean;
 
     @Field({ nullable: true })

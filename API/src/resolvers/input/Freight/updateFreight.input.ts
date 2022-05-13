@@ -34,6 +34,9 @@ export default class UpdateFreightInput {
     readonly email: string;
 
     @Field({ nullable: true })
+    readonly company: string;
+
+    @Field({ nullable: true })
     readonly phone: string;
 
     @Field({ nullable: true })

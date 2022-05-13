@@ -34,6 +34,9 @@ export default class FreightInput {
     @Field()
     readonly email: string;
 
+    @Field({ nullable: true })
+    readonly company: string;
+
     @Field()
     readonly phone: string;
 

@@ -27,6 +27,7 @@ class FreightResolver {
                 { destination: input.destination == undefined ? input.destination : Like(`%${input.destination}%`) },
                 { price: input.price },
                 { product: input.product == undefined ? input.product : Like(`%${input.product}%`) },
+                { company: input.company == undefined ? input.company : Like(`%${input.company}%`) },
                 { tracker_flag: input.tracker_flag },
                 { agencying_flag: input.agencying_flag },
                 {
@@ -46,6 +47,7 @@ class FreightResolver {
             destination: input.destination,
             price: input.price,
             product: input.product,
+            company: input.company,
             weight: input.weight,
             species: input.species,
             note: input.note,
@@ -73,6 +75,7 @@ class FreightResolver {
             destination: input.destination,
             price: input.price,
             product: input.product,
+            company: input.company,
             weight: input.weight,
             species: input.species,
             note: input.note
