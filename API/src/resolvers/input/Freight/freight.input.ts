@@ -22,10 +22,10 @@ export default class FreightInput {
     @Field()
     readonly product: string;
 
-    @Field()
+    @Field({ nullable: true })
     readonly weight: number;
 
-    @Field()
+    @Field({ nullable: true })
     readonly species: string;
 
     @Field({ nullable: true })

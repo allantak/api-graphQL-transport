@@ -125,8 +125,8 @@ input FreightInput {
   destination: String!
   price: Float
   product: String!
-  weight: Float!
-  species: String!
+  weight: Float
+  species: String
   note: String
   email: String!
   company: String
