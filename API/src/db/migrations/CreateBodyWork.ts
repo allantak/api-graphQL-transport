@@ -46,6 +46,7 @@ export class CreateBodyWork1648471323839 implements MigrationInterface {
     onDelete: 'CASCADE',
   });
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.connect()
     await queryRunner.createTable(this.bodyWorkTable);
     await queryRunner.createForeignKey('bodyWorks', this.foreingKey);
     await queryRunner.createForeignKey('bodyWorks', this.foreingKey_freight);

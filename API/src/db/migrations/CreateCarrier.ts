@@ -58,6 +58,11 @@ export class CreateCarrier1648297760912 implements MigrationInterface {
         length: '100',
         isNullable: false,
       },
+      {
+        name: 'img',
+        type: 'bytea',
+        isNullable: true,
+      },
     ],
   });
 
@@ -69,6 +74,7 @@ export class CreateCarrier1648297760912 implements MigrationInterface {
   });
 
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.connect()
     await queryRunner.createTable(this.carrierTable);
     await queryRunner.createForeignKey('carriers', this.foreignKey);
   }

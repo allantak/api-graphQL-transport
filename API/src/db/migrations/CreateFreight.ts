@@ -63,6 +63,24 @@ export class CreateFreight1648227544756 implements MigrationInterface {
         isNullable: true,
       },
       {
+        name: 'company',
+        type: 'varchar',
+        length: '255',
+        isNullable: true,
+      },
+      {
+        name: 'email',
+        type: 'varchar',
+        length: '255',
+        isNullable: true,
+      },
+      {
+        name: 'phone',
+        type: 'varchar',
+        length: '255',
+        isNullable: true,
+      },
+      {
         name: 'tracker_flag',
         type: 'boolean',
         isNullable: true,
@@ -102,6 +120,7 @@ export class CreateFreight1648227544756 implements MigrationInterface {
   });
 
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.connect()
     await queryRunner.createTable(this.freightTable);
     await queryRunner.createForeignKey('freights', this.foreignKey);
   }

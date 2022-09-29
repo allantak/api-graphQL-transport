@@ -48,8 +48,8 @@ export default class Carrier {
     phone: string;
 
     @Field()
-    @Column({ nullable: true })
-    img: string;
+    @Column({ type: 'bytea', nullable: true })
+    img: number;
 
     @ManyToOne(() => User, user => user.carrierConnection)
     @JoinColumn({ name: 'user_id' })

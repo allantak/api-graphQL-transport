@@ -47,7 +47,7 @@ type Carrier {
   price: Float
   email: String!
   phone: String!
-  img: String!
+  img: Float!
   user: User!
   bodyWorks: [BodyWork!]!
 }
@@ -169,7 +169,7 @@ input CarrierInput {
   price: Float
   email: String!
   phone: String!
-  img: String
+  img: Float
   nameBodyWork: String
 }
 
@@ -182,7 +182,7 @@ input UpdateCarrierInput {
   price: Float
   email: String
   phone: String
-  img: String
+  img: Float
 }
 
 input DeleteCarrierInput {
