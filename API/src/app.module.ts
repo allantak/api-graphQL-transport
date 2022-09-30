@@ -11,6 +11,7 @@ import FreightResolver from './resolvers/freight.resolver';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import CarrierResolver from './resolvers/carrier.resolver';
 import BodyWorkResolver from './resolvers/bodyWork.resolver';
+import { ConfigModule } from '@nestjs/config'
 
 const graphQLImports = [
   UserResolver,
@@ -20,7 +21,9 @@ const graphQLImports = [
 ];
 
 @Module({
-  imports: [TypeOrmModule.forRoot(config),
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot(config),
     RepoModule,
     ...graphQLImports,
     GraphQLModule.forRoot<ApolloDriverConfig>({
