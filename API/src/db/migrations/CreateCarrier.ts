@@ -21,7 +21,7 @@ export class CreateCarrier1648297760912 implements MigrationInterface {
       {
         name: 'user_id',
         type: 'integer',
-        isNullable: true,
+        isNullable: false,
       },
       {
         name: 'carrier',

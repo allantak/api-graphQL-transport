@@ -39,6 +39,14 @@ class FreightResolver {
         })
     }
 
+    @Query(() => [Freight])
+    public async userFreight(@Args('id') id: number): Promise<Freight[]> {
+        return await this.repoService.freightRepo.find({
+            where: { user_id: id },
+            
+        })
+    }
+
     @Mutation(() => Freight)
     public async createFreight(@Args('data') input: FreightInput): Promise<Freight> {
         const freight = await this.repoService.freightRepo.create({

@@ -31,7 +31,7 @@ export class CreateUser1647993087848 implements MigrationInterface {
         name: 'permission',
         type: 'varchar',
         length: '255',
-        isNullable: false,
+        isNullable: true,
       },
       {
         name: 'created_at',

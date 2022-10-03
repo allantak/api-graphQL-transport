@@ -69,8 +69,10 @@ type Query {
   authenticatedUser(data: SingInInput!): User!
   getFreights: [Freight!]!
   searchFreight(data: SearchFreightInput!): [Freight!]!
+  userFreight(id: Float!): [Freight!]!
   getCarriers: [Carrier!]!
   searchCarrier(data: SearchCarrierInput!): [Carrier!]!
+  userCarrier(id: Float!): [Carrier!]!
   getBodyWork: [BodyWork!]!
 }
 

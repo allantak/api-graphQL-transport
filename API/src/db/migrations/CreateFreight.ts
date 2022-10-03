@@ -21,7 +21,7 @@ export class CreateFreight1648227544756 implements MigrationInterface {
       {
         name: 'user_id',
         type: 'integer',
-        isNullable: true,
+        isNullable: false,
       },
       {
         name: 'origin',

@@ -37,6 +37,14 @@ class CarrierResolver {
         });
     }
 
+    @Query(() => [Carrier])
+    public async userCarrier(@Args('id') id: number): Promise<Carrier[]> {
+        return this.repoService.carrierRepo.find({
+            where:
+                { user_id: id },
+        });
+    }
+
     @Mutation(() => Carrier)
     public async createCarrier(@Args('data') input: CarrierInput): Promise<Carrier> {
         const carrier = await this.repoService.carrierRepo.create({
