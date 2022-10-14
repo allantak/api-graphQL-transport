@@ -40,16 +40,16 @@ export default class Carrier {
     price: number;
 
     @Field()
-    @Column({ nullable: true })
+    @Column()
     email: string;
 
     @Field()
-    @Column({ nullable: true })
+    @Column()
     phone: string;
 
-    @Field()
-    @Column({ type: 'bytea', nullable: true })
-    img: number;
+    @Field({ nullable: true })
+    @Column()
+    img: string;
 
     @ManyToOne(() => User, user => user.carrierConnection)
     @JoinColumn({ name: 'user_id' })

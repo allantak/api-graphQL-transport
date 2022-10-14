@@ -80,7 +80,15 @@ class CarrierResolver {
             price: input.price,
             email: input.email,
             phone: input.phone,
+            img: input.img,
         })
+        if (input.nameBodyWork) {
+            await this.repoService.bodyWorkRepo.save({
+                id: input.bodyWork_id,
+                carrier_id: update.id,
+                name: input.nameBodyWork,
+            })
+        }
         return update
     }
 

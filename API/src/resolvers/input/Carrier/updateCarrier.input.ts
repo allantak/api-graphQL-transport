@@ -11,6 +11,9 @@ export default class UpdateCarrierInput {
     readonly user_id: number;
 
     @Field({ nullable: true })
+    readonly bodyWork_id: number;
+
+    @Field({ nullable: true })
     readonly carrier: string;
 
     @Field({ nullable: true })
@@ -29,5 +32,8 @@ export default class UpdateCarrierInput {
     readonly phone: string;
 
     @Field({ nullable: true })
-    readonly img: number;
+    readonly img: string;
+
+    @Field({ nullable: true })
+    readonly nameBodyWork: string;
 }

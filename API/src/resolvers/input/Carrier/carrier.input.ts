@@ -29,7 +29,7 @@ export default class CarrierInput {
     readonly phone: string;
 
     @Field({ nullable: true })
-    readonly img: number;
+    readonly img: string;
 
     @Field({ nullable: true })
     readonly nameBodyWork: string;

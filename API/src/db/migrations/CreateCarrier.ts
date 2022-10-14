@@ -60,7 +60,8 @@ export class CreateCarrier1648297760912 implements MigrationInterface {
       },
       {
         name: 'img',
-        type: 'bytea',
+        type: 'varchar',
+        length: '255',
         isNullable: true,
       },
     ],

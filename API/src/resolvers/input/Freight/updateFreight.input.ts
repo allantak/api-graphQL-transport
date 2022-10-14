@@ -10,6 +10,9 @@ export default class UpdateFreightInput {
     readonly user_id: number;
 
     @Field({ nullable: true })
+    readonly bodyWork_id: number;
+
+    @Field({ nullable: true })
     readonly origin: string;
 
     @Field({ nullable: true })
@@ -47,4 +50,7 @@ export default class UpdateFreightInput {
 
     @Field({ nullable: true })
     readonly delivery_date: Date;
+
+    @Field({ nullable: true })
+    readonly nameBodyWork: string;
 }
