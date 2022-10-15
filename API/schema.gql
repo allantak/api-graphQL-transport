@@ -142,6 +142,7 @@ input FreightInput {
 input UpdateFreightInput {
   id: Float!
   user_id: Float
+  bodyWork_id: Float
   origin: String
   destination: String
   price: Float
@@ -155,6 +156,7 @@ input UpdateFreightInput {
   tracker_flag: Boolean
   agencying_flag: Boolean
   delivery_date: DateTime
+  nameBodyWork: String
 }
 
 input DeleteFreightInput {

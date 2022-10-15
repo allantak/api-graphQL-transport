@@ -43,7 +43,7 @@ class FreightResolver {
     public async userFreight(@Args('id') id: number): Promise<Freight[]> {
         return await this.repoService.freightRepo.find({
             where: { user_id: id },
-            
+
         })
     }
 
@@ -86,13 +86,15 @@ class FreightResolver {
             company: input.company,
             weight: input.weight,
             species: input.species,
-            note: input.note
+            note: input.note,
+            email: input.email,
+            phone: input.phone
         });
 
         if (input.nameBodyWork) {
             await this.repoService.bodyWorkRepo.save({
                 id: input.bodyWork_id,
-                carrier_id: update.id,
+                freight_id: update.id,
                 name: input.nameBodyWork,
             })
         }
