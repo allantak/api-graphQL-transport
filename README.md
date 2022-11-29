@@ -8,7 +8,7 @@
  - [Allan Takeuchi Bustamante](https://github.com/allantak)
 
 ### 🤔 Introdução
-API de uma aplicação mobile(Transport), Transport é um aplicativo com intuito de entregar facilidade para um camionheiro (Autonomo/Empresarial) encontrar uma carga.
+API de uma aplicação mobile(Transport), Transport é um aplicativo com intuito de entregar facilidade para um camionheiro autonomo divulgar seu serviço e encontrar carga.
 
 ### 🎏 Features
 
