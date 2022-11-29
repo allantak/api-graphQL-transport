@@ -21,12 +21,12 @@ export class CreateBodyWork1648471323839 implements MigrationInterface {
       {
         name: 'carrier_id',
         type: 'integer',
-        isNullable: false,
+        isNullable: true,
       },
       {
         name: 'freight_id',
         type: 'integer',
-        isNullable: false,
+        isNullable: true,
       },
       { name: 'name', type: 'varchar', length: '255', isNullable: true },
     ],
